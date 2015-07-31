@@ -1,0 +1,28 @@
+{
+    "name": "fesor/behat-concurrency",
+    "description": "Behat extension which brings concurrency!",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Protko",
+            "email": "fesors@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Fesor\\Behat\\Concurrency\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"spec\\Fesor\\Behat\\Concurrency\\": "specs/"}
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.0",
+        "ext-pcntl": "*",
+        "behat/behat": "~3.0.12"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.3",
+        "phpspec/phpspec": "^2.2"
+    }
+}
