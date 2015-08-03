@@ -14,12 +14,17 @@ For this reason i made this extension
 
 ## How it works
 
-This difference between approach described above and this extension is dynamic scenario execution scheduling. When you run behat with `--concurrently` option, this will
+The difference between approach described above and this extension is dynamic scheduling. When you run behat with `--concurrently` option, this will
 
  - start scheduler, which will build queue of scenarios to execute.
  - creates pool of worker processes
  - connect scheduler and workers via TCP or Unix sockets
+ - will give each free worker another task in loop (with non-blocking I/O)
 
-scheduler will send tasks to workers and will wait for result. If one of workers will fail, then process manager will replace it with fresh one and mark scenario as failed (if you didn't pass `--stop-on-failure` option). In case of outline scenario, each example will be executed as independent scenario, which allow us to execute then in concurrently.
+Scheduler will send tasks to workers and will wait for result. When one of workers is done, it sends back test execution results, which mean that it ready for another job. If one of workers will fail, then process manager will replace it with fresh one and mark scenario as failed (if you didn't pass `--stop-on-failure` option). In case of outline scenario, each example will be executed as independent scenario, which allow us to execute then in concurrently.
 
 If you are using E2E approach in your step implementation, then you probably should make it possible to run each task independently. To do so each worker will has `BEHAT_WORKER_NUMBER` env variable, which will allow us to use separate database connection per worker for example.
+
+## Limitations
+
+ - `beforeSuite` and `afterSuite` events are not available
