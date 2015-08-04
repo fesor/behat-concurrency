@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class WorkerController implements Controller
+final class WorkerController implements Controller
 {
 
     const ENV_WORKER_NUMBER = 'BEHAT_WORKER_NUMBER';

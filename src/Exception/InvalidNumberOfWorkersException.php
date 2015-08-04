@@ -3,7 +3,7 @@
 namespace Fesor\Behat\Concurrency\Exception;
 
 
-class InvalidNumberOfWorkersException extends \InvalidArgumentException
+final class InvalidNumberOfWorkersException extends \InvalidArgumentException
 {
     public function __construct($n)
     {
