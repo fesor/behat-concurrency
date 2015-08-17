@@ -4,6 +4,7 @@ namespace Fesor\Behat\Concurrency\Cli;
 
 use Behat\Testwork\Cli\Controller;
 use Fesor\Behat\Concurrency\Exception\InvalidNumberOfWorkersException;
+use Fesor\Behat\Concurrency\Tester\ConcurrentExercise;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,6 +12,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ConcurrencyController implements Controller
 {
+
+    /**
+     * @var ConcurrentExercise
+     */
+    private $exercise;
+
+    /**
+     * @param ConcurrentExercise $exercise
+     */
+    public function __construct(ConcurrentExercise $exercise)
+    {
+        $this->exercise = $exercise;
+    }
+
 
     /**
      * @inheritdoc
@@ -39,6 +54,8 @@ final class ConcurrencyController implements Controller
         if ($processes === 1) {
             return;
         }
+
+        $this->exercise->enable();
 
         return 0;
     }
