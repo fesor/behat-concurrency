@@ -1,0 +1,10 @@
+default:
+  autoload:
+      '': %paths.base%
+  suites:
+      default:
+          contexts:
+            - DummyContext
+          paths: [%paths.base%/../../.tmp/features/]
+  extensions:
+      Fesor\Behat\Concurrency: ~
